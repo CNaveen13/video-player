@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Video Player</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #060505;
+        }
+
+        #video-container {
+            max-width: 1000px;
+            box-shadow: 0 0 10px rgba(3, 12, 110, 0.844);
+            text-align: center;
+            padding: 20px;
+            background-color:whitesmoke;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        input[type="file"] {
+            display:none;
+        }
+
+        label {
+            display: block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        i{
+            position:left;
+            color:darkgoldenrod;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="video-container">
+        <i>Play it</i>
+        <label for="video-upload">Choose a Video</label>
+        <input type="file" id="video-upload" accept="video" onchange="playVideo()">
+        <video controls id="video-player">
+            Your browser does not support the video tag.
+        </video>
+        <div id="file-name"></div>
+    </div>
+
+    <script>
+        function playVideo() {
+            const videoUpload = document.getElementById('video-upload');
+            const videoPlayer = document.getElementById('video-player');
+            const fileNameDisplay = document.getElementById('file-name');
+           
+
+            const file = videoUpload.files[0];
+
+            if (file) {
+                const objectURL = URL.createObjectURL(file);
+                videoPlayer.src = objectURL;
+                videoPlayer.play();
+                
+                fileNameDisplay.textContent = ` ${file.name}`;
+                
+               
+            }
+        }
+    </script>
+</body>
+</html>
